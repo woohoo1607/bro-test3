@@ -1,0 +1,90 @@
+:root {
+    --size-q: 60px;
+}
+
+.header-root .delete-button {
+
+    border-bottom-width: 2px;
+}
+
+.footer-root .add-button {
+
+    border-top-width: 2px;
+}
+
+.left-body-root .delete-button {
+
+    border-right-width: 2px;
+}
+
+.right-body-root .add-button {
+
+    border-left-width: 2px;
+}
+
+.body-root {
+    display: flex;
+}
+
+.left-body-root, .right-body-root {
+    margin-top: 2px;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-root, .footer-root {
+
+    display: flex;
+}
+
+.table {
+    display: inline-block;
+    border: 1px #48aae6 solid;
+    background-color: white;
+    padding: 1px;
+}
+
+.line {
+    display: flex;
+}
+
+.item {
+
+    background-color: #48aae6;
+    border: 1px solid white;
+}
+
+.button {
+    padding: 0;
+    color: #FFF;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+}
+
+.add-button {
+    background-color: #f3a500;
+    transition: background-color .3s;
+}
+
+.add-button:hover {
+    background-color: #f6c052;
+}
+
+.delete-button {
+    background-color: #b20000;
+    transition: background-color .3s, left .5s, top .5s ease-in-out ;
+    position: relative;
+}
+
+.delete-button:hover {
+    background-color: #ca4c49;
+}
+
+.add-button:after {
+    content: '+';
+}
+
+.delete-button:after {
+    content: '-';
+}
