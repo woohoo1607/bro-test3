@@ -9,14 +9,8 @@ const Squares = ({ initialWidth, initialHeight, cellSize, parentId }) => {
   initialHeight = initialHeight || 4;
   cellSize = cellSize || 50;
 
-  const [isVisibleDeleteLineBtn, setIsVisibleDeleteLineBtn] = useState(false);
-  const [isVisibleDeleteColumnBtn, setIsVisibleDeleteColumnBtn] = useState(
-    false
-  );
-  const [deleteLineBtnDisplace, setDeleteLineBtnDisplace] = useState(0);
-  const [deleteCellBtnDisplace, setDeleteCellBtnDisplace] = useState(0);
-  const [deleteLineBtnIndex, setDeleteLineBtnIndex] = useState(0);
-  const [deleteCellBtnIndex, setDeleteCellBtnIndex] = useState(0);
+  const [deleteLineBtnIndex, setDeleteLineBtnIndex] = useState(null);
+  const [deleteCellBtnIndex, setDeleteCellBtnIndex] = useState(null);
   const [data, setData] = useState([]);
 
   if (!data.length) {
@@ -32,90 +26,34 @@ const Squares = ({ initialWidth, initialHeight, cellSize, parentId }) => {
   }
 
   const hideDeleteButtons = () => {
-    setIsVisibleDeleteLineBtn(false);
-    setIsVisibleDeleteColumnBtn(false);
+    setDeleteLineBtnIndex(null);
+    setDeleteCellBtnIndex(null);
   };
 
-  const whereMouse = (e) => {
-    const el = e.relatedTarget;
-    if (el) {
-      const isItem = !!el.classList.value
-        .split(" ")
-        .find((el) => el === "item");
-      if (isItem) {
-        const line = el.parentNode;
-        const isLine = !!el.parentNode.classList.value
-          .split(" ")
-          .find((el) => el === "line");
-        if (isLine) {
-          const [cellIndex, cellLength] = findIndex(el);
-          const [lineIndex, lineLength] = findIndex(line);
-          setDeleteLineBtnDisplace(lineIndex * cellSize);
-          setDeleteCellBtnDisplace(cellIndex * cellSize);
-          setDeleteLineBtnIndex(lineIndex);
-          setDeleteCellBtnIndex(cellIndex);
-          lineLength > 1
-            ? setIsVisibleDeleteLineBtn(true)
-            : setIsVisibleDeleteLineBtn(false);
-          cellLength > 1
-            ? setIsVisibleDeleteColumnBtn(true)
-            : setIsVisibleDeleteColumnBtn(false);
-        }
-      } else {
-        if (el.parentNode === document) {
-          hideDeleteButtons();
-          return;
-        }
-        const isBodyRootParent = !!el.parentNode.classList.value
-          .split(" ")
-          .find((el) => el === "body-root");
-        if (!el) {
-          hideDeleteButtons();
-        } else if (el.parentNode.id === parentId) {
-          hideDeleteButtons();
-        } else if (isBodyRootParent && el.className !== "table") {
-          hideDeleteButtons();
-        } else if (el.id === parentId) {
-          hideDeleteButtons();
-        }
-      }
-    } else {
-      hideDeleteButtons();
-    }
-  };
-
-  const findIndex = (element) => {
-    for (let i = 0; i < element.parentNode.childNodes.length; i++) {
-      if (element.parentNode.childNodes[i] === element) {
-        return [i, element.parentNode.childNodes.length];
-      }
-    }
-  };
-
-  const deleteLine = () => {
+  const deleteLine = (index) => () => {
     if (data.length < 2) {
       return;
     }
     const newData = [...data];
-    newData.splice(deleteLineBtnIndex, 1);
+    newData.splice(index, 1);
     setData(newData);
     hideDeleteButtons();
   };
 
-  const deleteColumn = () => {
+  const deleteColumn = (index) => () => {
     if (data[0].length < 2) {
       return;
     }
     const newData = data.map((line) => {
       const newLine = [...line];
-      newLine.splice(deleteCellBtnIndex, 1);
+      newLine.splice(index, 1);
       return newLine;
     });
     setData(newData);
     hideDeleteButtons();
   };
 
-  const addLine = () => {
+  const addLine = () => () => {
     const newData = [...data];
     const newLine = [];
     for (let i = 0; i < data[0].length; i++) {
@@ -125,7 +63,7 @@ const Squares = ({ initialWidth, initialHeight, cellSize, parentId }) => {
     setData(newData);
   };
 
-  const addColumn = () => {
+  const addColumn = () => () => {
     const newData = data.map((line) => {
       const newLine = [...line];
       newLine.push("");
@@ -135,37 +73,45 @@ const Squares = ({ initialWidth, initialHeight, cellSize, parentId }) => {
   };
 
   return (
-    <div id={parentId} onMouseOut={whereMouse}>
+    <div id={parentId} onMouseEnter={hideDeleteButtons}>
       <div className="header-root" style={{ marginLeft: `${cellSize + 2}px` }}>
         <Button
           id="deleteColumn"
           onClick={deleteColumn}
-          isVisible={isVisibleDeleteColumnBtn}
+          isVisible={deleteCellBtnIndex !== null}
           cellSize={cellSize}
-          displace={deleteCellBtnDisplace}
           isDeleteBtn={true}
           isDeleteColumn={true}
+          deleteBtnIndex={deleteCellBtnIndex}
+          hideDeleteButtons={hideDeleteButtons}
         />
       </div>
-      <div className="body-root">
+      <div className="body-root" onMouseEnter={hideDeleteButtons}>
         <div className="left-body-root">
           <Button
             id="deleteLine"
             onClick={deleteLine}
-            isVisible={isVisibleDeleteLineBtn}
+            isVisible={deleteLineBtnIndex !== null}
             cellSize={cellSize}
-            displace={deleteLineBtnDisplace}
             isDeleteBtn={true}
             isDeleteColumn={false}
+            deleteBtnIndex={deleteLineBtnIndex}
+            hideDeleteButtons={hideDeleteButtons}
           />
         </div>
-        <Table data={data} cellSize={cellSize} />
-        <div className="right-body-root">
+        <Table
+          data={data}
+          cellSize={cellSize}
+          setLineIndex={setDeleteLineBtnIndex}
+          setCellIndex={setDeleteCellBtnIndex}
+        />
+        <div className="right-body-root" onMouseEnter={hideDeleteButtons}>
           <Button
             id="addColumn"
             onClick={addColumn}
             isDeleteBtn={false}
             cellSize={cellSize}
+            hideDeleteButtons={hideDeleteButtons}
           />
         </div>
       </div>
@@ -175,6 +121,7 @@ const Squares = ({ initialWidth, initialHeight, cellSize, parentId }) => {
           onClick={addLine}
           isDeleteBtn={false}
           cellSize={cellSize}
+          hideDeleteButtons={hideDeleteButtons}
         />
       </div>
     </div>

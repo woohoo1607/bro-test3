@@ -5,12 +5,12 @@ const Button = ({
   onClick,
   isDeleteBtn,
   cellSize,
-  displace,
   isVisible,
   isDeleteColumn,
+  deleteBtnIndex,
+  hideDeleteButtons,
 }) => {
   isDeleteBtn = isDeleteBtn || false;
-  displace = displace || 0;
   isVisible = isVisible || false;
 
   const style = {
@@ -22,9 +22,9 @@ const Button = ({
   if (isDeleteBtn) {
     style.visibility = isVisible ? "visible" : "hidden";
     if (isDeleteColumn) {
-      style.left = `${displace}px`;
+      style.left = `${deleteBtnIndex * cellSize}px`;
     } else {
-      style.top = `${displace}px`;
+      style.top = `${deleteBtnIndex * cellSize}px`;
     }
   }
   const className = isDeleteBtn
@@ -33,9 +33,10 @@ const Button = ({
   return (
     <button
       id={id}
-      onClick={onClick}
+      onClick={onClick(deleteBtnIndex)}
       className={className}
       style={style}
+      onMouseOut={hideDeleteButtons}
     ></button>
   );
 };
