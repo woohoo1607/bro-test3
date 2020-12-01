@@ -58,7 +58,13 @@ const Squares = ({initialWidth, initialHeight, cellSize, parentId}) => {
           return
         }
         const isBodyRootParent = !!el.parentNode.classList.value.split(' ').find(el => el === 'body-root');
-        if (el === null || el.parentNode.id === parentId || isBodyRootParent && el.className !== 'table' || el.id === parentId) {
+        if (!el) {
+          hideDeleteButtons();
+        } else if (el.parentNode.id === parentId) {
+          hideDeleteButtons();
+        } else if (isBodyRootParent && el.className !== 'table') {
+          hideDeleteButtons();
+        } else if (el.id === parentId) {
           hideDeleteButtons();
         }
       }

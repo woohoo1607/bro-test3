@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import Squares from './components/Squares/Squares';
 import React from 'react';
