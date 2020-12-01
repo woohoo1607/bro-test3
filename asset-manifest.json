@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/bro-test3/static/css/main.f012b86e.chunk.css",
-    "main.js": "/bro-test3/static/js/main.dd6a8261.chunk.js",
-    "main.js.map": "/bro-test3/static/js/main.dd6a8261.chunk.js.map",
+    "main.js": "/bro-test3/static/js/main.f3ccbf78.chunk.js",
+    "main.js.map": "/bro-test3/static/js/main.f3ccbf78.chunk.js.map",
     "runtime-main.js": "/bro-test3/static/js/runtime-main.249c9b3d.js",
     "runtime-main.js.map": "/bro-test3/static/js/runtime-main.249c9b3d.js.map",
     "static/js/2.5561c69d.chunk.js": "/bro-test3/static/js/2.5561c69d.chunk.js",
@@ -11,13 +11,12 @@
     "static/js/3.ce907581.chunk.js.map": "/bro-test3/static/js/3.ce907581.chunk.js.map",
     "index.html": "/bro-test3/index.html",
     "static/css/main.f012b86e.chunk.css.map": "/bro-test3/static/css/main.f012b86e.chunk.css.map",
-    "static/js/2.5561c69d.chunk.js.LICENSE.txt": "/bro-test3/static/js/2.5561c69d.chunk.js.LICENSE.txt",
-    "static/media/logo.6ce24c58.svg": "/bro-test3/static/media/logo.6ce24c58.svg"
+    "static/js/2.5561c69d.chunk.js.LICENSE.txt": "/bro-test3/static/js/2.5561c69d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.249c9b3d.js",
     "static/js/2.5561c69d.chunk.js",
     "static/css/main.f012b86e.chunk.css",
-    "static/js/main.dd6a8261.chunk.js"
+    "static/js/main.f3ccbf78.chunk.js"
   ]
 }
