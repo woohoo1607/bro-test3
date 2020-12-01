@@ -14,7 +14,7 @@ const Button = ({
   isVisible = isVisible || false;
 
   const style = {
-    height: `${cellSize + 1}px`,
+    height: `${cellSize}px`,
     width: `${cellSize}px`,
     lineHeight: `${cellSize - 4}px`,
     fontSize: `${cellSize / 2}px`,
@@ -36,7 +36,7 @@ const Button = ({
       onClick={onClick(deleteBtnIndex)}
       className={className}
       style={style}
-      onMouseOut={hideDeleteButtons}
+      onMouseLeave={hideDeleteButtons}
     ></button>
   );
 };

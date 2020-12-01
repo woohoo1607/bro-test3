@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Table from "./Table/Table";
 import Button from "./Button";
@@ -13,19 +13,19 @@ const Squares = ({ initialWidth, initialHeight, cellSize, parentId }) => {
   const [deleteCellBtnIndex, setDeleteCellBtnIndex] = useState(null);
   const [data, setData] = useState([]);
 
-  if (!data.length) {
-    const data = [];
+  useEffect(()=> {
+    const initialData = [];
     for (let i = 0; i < initialHeight; i++) {
       const line = [];
       for (let j = 0; j < initialWidth; j++) {
         line.push("");
       }
-      data.push(line);
+      initialData.push(line);
     }
-    setData(data);
-  }
+    setData(initialData);
+  },[initialWidth, initialHeight, cellSize])
 
-  const hideDeleteButtons = () => {
+  const hideDeleteButtons = (e) => {
     setDeleteLineBtnIndex(null);
     setDeleteCellBtnIndex(null);
   };
@@ -74,7 +74,8 @@ const Squares = ({ initialWidth, initialHeight, cellSize, parentId }) => {
 
   return (
     <div id={parentId} onMouseEnter={hideDeleteButtons}>
-      <div className="header-root" style={{ marginLeft: `${cellSize + 2}px` }}>
+      <div className="header-root" style={{ paddingLeft: `${cellSize + 2}px` }} onMouseOver={hideDeleteButtons}>
+        <div onMouseOver={(e)=> e.stopPropagation()}>
         <Button
           id="deleteColumn"
           onClick={deleteColumn}
@@ -85,9 +86,11 @@ const Squares = ({ initialWidth, initialHeight, cellSize, parentId }) => {
           deleteBtnIndex={deleteCellBtnIndex}
           hideDeleteButtons={hideDeleteButtons}
         />
+        </div>
       </div>
       <div className="body-root" onMouseEnter={hideDeleteButtons}>
-        <div className="left-body-root">
+        <div className="left-body-root" onMouseOver={hideDeleteButtons}>
+          <div onMouseOver={(e)=> e.stopPropagation()}>
           <Button
             id="deleteLine"
             onClick={deleteLine}
@@ -98,6 +101,7 @@ const Squares = ({ initialWidth, initialHeight, cellSize, parentId }) => {
             deleteBtnIndex={deleteLineBtnIndex}
             hideDeleteButtons={hideDeleteButtons}
           />
+          </div>
         </div>
         <Table
           data={data}
@@ -105,7 +109,8 @@ const Squares = ({ initialWidth, initialHeight, cellSize, parentId }) => {
           setLineIndex={setDeleteLineBtnIndex}
           setCellIndex={setDeleteCellBtnIndex}
         />
-        <div className="right-body-root" onMouseEnter={hideDeleteButtons}>
+        <div className="right-body-root" onMouseOver={hideDeleteButtons}>
+          <div onMouseOver={(e)=> e.stopPropagation()}>
           <Button
             id="addColumn"
             onClick={addColumn}
@@ -113,9 +118,11 @@ const Squares = ({ initialWidth, initialHeight, cellSize, parentId }) => {
             cellSize={cellSize}
             hideDeleteButtons={hideDeleteButtons}
           />
+          </div>
         </div>
       </div>
-      <div className="footer-root" style={{ marginLeft: `${cellSize + 2}px` }}>
+      <div className="footer-root" style={{ paddingLeft: `${cellSize + 2}px` }} onMouseOver={hideDeleteButtons}>
+        <div onMouseOver={(e)=> e.stopPropagation()}>
         <Button
           id="addLine"
           onClick={addLine}
@@ -123,6 +130,7 @@ const Squares = ({ initialWidth, initialHeight, cellSize, parentId }) => {
           cellSize={cellSize}
           hideDeleteButtons={hideDeleteButtons}
         />
+        </div>
       </div>
     </div>
   );
