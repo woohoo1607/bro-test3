@@ -35,8 +35,7 @@ const Squares = ({ initialWidth, initialHeight, cellSize, parentId }) => {
     if (data.length < 2) {
       return;
     }
-    const newData = data.filter((line, i) => i !== index);
-    setData(newData);
+    setData(data.filter((line, i) => i !== index));
     hideDeleteButtons();
   };
 
@@ -44,8 +43,7 @@ const Squares = ({ initialWidth, initialHeight, cellSize, parentId }) => {
     if (data[0].length < 2) {
       return;
     }
-    const newData = data.map((line) => line.filter((cell, i) => i !== index));
-    setData(newData);
+    setData(data.map((line) => line.filter((cell, i) => i !== index)));
     hideDeleteButtons();
   };
 
