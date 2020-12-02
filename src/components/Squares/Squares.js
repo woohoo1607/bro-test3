@@ -4,11 +4,7 @@ import Table from "./Table/Table";
 import Button from "./Button";
 import "./styles.css";
 
-const Squares = ({ initialWidth, initialHeight, cellSize, parentId }) => {
-  initialWidth = initialWidth || 4;
-  initialHeight = initialHeight || 4;
-  cellSize = cellSize || 50;
-
+const Squares = ({ initialWidth = 4, initialHeight = 4, cellSize = 50 }) => {
   const [deleteLineBtnIndex, setDeleteLineBtnIndex] = useState(null);
   const [deleteCellBtnIndex, setDeleteCellBtnIndex] = useState(null);
   const [data, setData] = useState([]);
@@ -32,39 +28,38 @@ const Squares = ({ initialWidth, initialHeight, cellSize, parentId }) => {
   };
 
   const deleteLine = (index) => () => {
-    if (data.length < 2) {
-      return;
+    if (data.length > 1) {
+      setData((data) => data.filter((line, i) => i !== index));
+      hideDeleteButtons();
     }
-    setData(data.filter((line, i) => i !== index));
-    hideDeleteButtons();
   };
 
   const deleteColumn = (index) => () => {
-    if (data[0].length < 2) {
-      return;
+    if (data[0].length > 1) {
+      setData((data) =>
+        data.map((line) => line.filter((cell, i) => i !== index))
+      );
+      hideDeleteButtons();
     }
-    setData(data.map((line) => line.filter((cell, i) => i !== index)));
-    hideDeleteButtons();
   };
 
   const addLine = () => () => {
-    const newData = [...data];
-    const newLine = Array.from({ length: data[0].length }, () => "");
-    newData.push(newLine);
-    setData(newData);
+    setData((data) => [
+      ...data,
+      Array.from({ length: data[0].length }, () => ""),
+    ]);
   };
 
   const addColumn = () => () => {
-    const newData = data.map((line) => {
-      const newLine = [...line];
-      newLine.push("");
-      return newLine;
-    });
-    setData(newData);
+    setData((data) =>
+      data.map((line) => {
+        return [...line, ""];
+      })
+    );
   };
 
   return (
-    <div id={parentId} onMouseEnter={hideDeleteButtons}>
+    <div onMouseEnter={hideDeleteButtons}>
       <div
         className="header-root"
         style={{ paddingLeft: `${cellSize + 2}px` }}

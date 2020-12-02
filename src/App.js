@@ -3,7 +3,7 @@ import Squares from "./components/Squares/Squares";
 import "./App.css";
 
 function App() {
-  return <Squares parentId={"square"} />;
+  return <Squares />;
 }
 
 export default App;
