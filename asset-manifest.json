@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/bro-test3/static/css/main.ace7105c.chunk.css",
-    "main.js": "/bro-test3/static/js/main.5a205d4d.chunk.js",
-    "main.js.map": "/bro-test3/static/js/main.5a205d4d.chunk.js.map",
+    "main.js": "/bro-test3/static/js/main.d09bcf5c.chunk.js",
+    "main.js.map": "/bro-test3/static/js/main.d09bcf5c.chunk.js.map",
     "runtime-main.js": "/bro-test3/static/js/runtime-main.249c9b3d.js",
     "runtime-main.js.map": "/bro-test3/static/js/runtime-main.249c9b3d.js.map",
-    "static/js/2.706bd9e4.chunk.js": "/bro-test3/static/js/2.706bd9e4.chunk.js",
-    "static/js/2.706bd9e4.chunk.js.map": "/bro-test3/static/js/2.706bd9e4.chunk.js.map",
+    "static/js/2.e12bfe4c.chunk.js": "/bro-test3/static/js/2.e12bfe4c.chunk.js",
+    "static/js/2.e12bfe4c.chunk.js.map": "/bro-test3/static/js/2.e12bfe4c.chunk.js.map",
     "static/js/3.ce907581.chunk.js": "/bro-test3/static/js/3.ce907581.chunk.js",
     "static/js/3.ce907581.chunk.js.map": "/bro-test3/static/js/3.ce907581.chunk.js.map",
     "index.html": "/bro-test3/index.html",
     "static/css/main.ace7105c.chunk.css.map": "/bro-test3/static/css/main.ace7105c.chunk.css.map",
-    "static/js/2.706bd9e4.chunk.js.LICENSE.txt": "/bro-test3/static/js/2.706bd9e4.chunk.js.LICENSE.txt"
+    "static/js/2.e12bfe4c.chunk.js.LICENSE.txt": "/bro-test3/static/js/2.e12bfe4c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.249c9b3d.js",
-    "static/js/2.706bd9e4.chunk.js",
+    "static/js/2.e12bfe4c.chunk.js",
     "static/css/main.ace7105c.chunk.css",
-    "static/js/main.5a205d4d.chunk.js"
+    "static/js/main.d09bcf5c.chunk.js"
   ]
 }
