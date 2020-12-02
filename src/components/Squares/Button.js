@@ -7,9 +7,10 @@ const Button = ({
   cellSize,
   isVisible = false,
   isDeleteColumn,
-  deleteBtnIndex = 0,
+  deleteBtnIndex,
   hideDeleteButtons,
 }) => {
+  deleteBtnIndex = deleteBtnIndex || 0;
   useEffect(() => {
     setPrevIsVisible(isVisible);
   }, [isVisible]);
