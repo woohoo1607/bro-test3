@@ -12,6 +12,7 @@ const Button = ({
 }) => {
   isDeleteBtn = isDeleteBtn || false;
   isVisible = isVisible || false;
+  deleteBtnIndex = deleteBtnIndex || 0;
 
   const style = {
     height: `${cellSize}px`,
